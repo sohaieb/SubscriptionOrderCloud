@@ -2,107 +2,22 @@
   <mat-stepper [linear]="isLinear" #stepper>
     <!-- Subscription Parameters -->
     <mat-step [stepControl]="subscriptionParameters">
-      <form [formGroup]="subscriptionParameters">
-        <ng-template matStepLabel>Subscription parameters:</ng-template>
-        <mat-grid-list cols="3" rowHeight="100px">
-          <mat-grid-tile>
-            <mat-form-field appearance="fill">
-              <mat-label>Duration</mat-label>
-              <mat-select required formControlName="duration">
-                <mat-option *ngFor="let duration of durations" [value]="duration.value">
-                  {{duration.text}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field appearance="fill">
-              <mat-label>Amount GB</mat-label>
-              <mat-select required formControlName="amount">
-                <mat-option *ngFor="let amount of amounts" [value]="amount.value">
-                  {{amount.text}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <section class="example-section">
-              <mat-checkbox formControlName="upfront" class="example-margin">Upfront payment: yes/no</mat-checkbox>
-            </section>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <div>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
+      <app-subscription-params [subscriptionParameters]="subscriptionParameters" [amounts]="amounts"
+                               [durations]="durations"></app-subscription-params>
     </mat-step>
-
+    <!-- .Subscription Parameters -->
 
     <!-- Payment Data -->
     <mat-step [stepControl]="paymentData">
-      <form [formGroup]="paymentData">
-        <ng-template matStepLabel>Payement Data:</ng-template>
-        <mat-grid-list cols="2" rowHeight="100px">
-          <mat-grid-tile colspan="2" rowspan="1">
-            <mat-form-field appearance="fill" class="width-100">
-              <mat-label>Card number</mat-label>
-              <input formControlName="cardNumber" type="text" matInput placeholder="xxxx xxxx xxxx xxxx"
-                     mask="0000 0000 0000 0000"/>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile class="left">
-            <mat-form-field appearance="fill">
-              <mat-label>Card Expiration Date</mat-label>
-              <input formControlName="cardExpiration" type="text" matInput placeholder="MM / YY" mask="00 / 00"/>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile class="right">
-            <mat-form-field appearance="fill">
-              <mat-label>Card Security Code</mat-label>
-              <input formControlName="cardSecurityCode" type="password" matInput mask="0009"/>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext [disabled]="paymentData.invalid">Next</button>
-        </div>
-      </form>
+      <app-payment-data [paymentData]="paymentData"></app-payment-data>
     </mat-step>
+    <!-- .Payment Data -->
 
+    <!-- Finalization -->
     <mat-step>
-      <form [formGroup]="finalizationGroup">
-        <ng-template matStepLabel>You are almost done!</ng-template>
-        <mat-grid-list cols="1" rowHeight="80px">
-          <mat-grid-tile colspan="1" rowspan="1" class="left">
-            <mat-label class="font-size-2">Payement Summary:</mat-label>
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1" class="left">
-              <b>Selected Subscription:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.text}}
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1" class="left">
-              <b>Price per GB:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.price_per_gb}}
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1" class="left">
-              <b>Total price:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.price_per_gb}}
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1" class="left">
-            <mat-form-field appearance="fill" class="width-100">
-              <mat-label>Your Email</mat-label>
-              <input formControlName="userEmail" type="text" matInput placeholder="example@example.com"/>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1" class="left">
-            <section class="example-section">
-              <mat-checkbox formControlName="termsCondition" class="example-margin">I accepte Terms and conditions.</mat-checkbox>
-            </section>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button [disabled]="orderForm.invalid || !orderForm.get('finalization.termsCondition')?.value" (click)="finishPayement()">Finish</button>
-        </div>
-      </form>
+      <app-finalization (onFinishPayement)="finishPayement()" [findOptionTextBy]="findOptionTextBy.bind(this)"
+                        [orderForm]="orderForm" [total]="total"></app-finalization>
     </mat-step>
+    <!-- .Finalization -->
   </mat-stepper>
 </div>
