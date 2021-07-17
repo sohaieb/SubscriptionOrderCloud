@@ -30,8 +30,11 @@
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
-  <div>
-    <button mat-button matStepperPrevious>Back</button>
-    <button mat-button matStepperNext [disabled]="paymentData.invalid">Next</button>
+  <app-calculation [total]="configuration.total" [orderForm]="configuration.orderForm" [findOptionTextBy]="configuration.findOptionTextBy"></app-calculation>
+  <div class="next-previous-group">
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext [disabled]="paymentData.invalid">Next</button>
+    </div>
   </div>
 </form>

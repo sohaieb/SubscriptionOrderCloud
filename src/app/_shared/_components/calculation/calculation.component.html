@@ -1,0 +1,11 @@
+<mat-divider></mat-divider>
+<mat-grid-list cols="1" rowHeight="55px">
+  <mat-grid-tile colspan="1" rowspan="1" class="left">
+    <b>Selected Subscription:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.text}}
+  </mat-grid-tile>
+
+  <mat-grid-tile colspan="1" rowspan="1" class="left">
+    <b>Total price:</b> {{total}} $
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-divider></mat-divider>

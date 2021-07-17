@@ -13,6 +13,7 @@ import { PaymentDataComponent } from './_shared/_components/payment-data/payment
 import { FinalizationComponent } from './_shared/_components/finalization/finalization.component';
 import {HttpClientModule} from "@angular/common/http";
 import {SharedGlobalModules} from "./_shared/_modules/shared-global-modules";
+import { CalculationComponent } from './_shared/_components/calculation/calculation.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {SharedGlobalModules} from "./_shared/_modules/shared-global-modules";
     OrderComponent,
     SubscriptionParamsComponent,
     PaymentDataComponent,
-    FinalizationComponent
+    FinalizationComponent,
+    CalculationComponent
   ],
   imports: [
     BrowserModule,

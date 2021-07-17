@@ -10,6 +10,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatDividerModule} from "@angular/material/divider";
 
 @NgModule({
   declarations: [],
@@ -27,7 +28,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MatSelectModule,
     MatOptionModule,
     MatCheckboxModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDividerModule
   ]
 })
 export class MatModules { }

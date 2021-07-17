@@ -27,7 +27,8 @@
       </section>
     </mat-grid-tile>
   </mat-grid-list>
-  <div>
+  <app-calculation [total]="configuration.total" [orderForm]="configuration.orderForm" [findOptionTextBy]="configuration.findOptionTextBy"></app-calculation>
+  <div class="next-previous-group">
     <button mat-button matStepperNext>Next</button>
   </div>
 </form>

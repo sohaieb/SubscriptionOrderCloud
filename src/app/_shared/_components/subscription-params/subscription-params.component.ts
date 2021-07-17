@@ -10,6 +10,7 @@ export class SubscriptionParamsComponent implements OnInit {
   @Input() subscriptionParameters: any;
   @Input() durations: any;
   @Input() amounts: any;
+  @Input() configuration: any;
 
   constructor() { }
 
