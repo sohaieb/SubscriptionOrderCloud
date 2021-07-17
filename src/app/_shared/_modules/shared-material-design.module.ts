@@ -28,8 +28,6 @@ import {MatGridListModule} from "@angular/material/grid-list";
     MatOptionModule,
     MatCheckboxModule,
     MatGridListModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  ]
 })
 export class MatModules { }
