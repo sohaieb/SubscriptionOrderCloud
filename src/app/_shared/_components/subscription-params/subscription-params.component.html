@@ -1,0 +1,34 @@
+<form [formGroup]="subscriptionParameters">
+  <ng-template matStepLabel>Subscription parameters:</ng-template>
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Duration</mat-label>
+        <mat-select required formControlName="duration">
+          <mat-option *ngFor="let duration of durations" [value]="duration.value">
+            {{duration.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Amount GB</mat-label>
+        <mat-select required formControlName="amount">
+          <mat-option *ngFor="let amount of amounts" [value]="amount.value">
+            {{amount.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <section class="example-section">
+        <mat-checkbox formControlName="upfront" class="example-margin">Upfront payment: yes/no</mat-checkbox>
+      </section>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <app-calculation [total]="configuration.total" [orderForm]="configuration.orderForm" [findOptionTextBy]="configuration.findOptionTextBy"></app-calculation>
+  <div class="next-previous-group">
+    <button mat-button matStepperNext>Next</button>
+  </div>
+</form>

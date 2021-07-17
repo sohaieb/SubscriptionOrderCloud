@@ -1,0 +1,34 @@
+<div class="container">
+  <mat-stepper [linear]="isLinear" #stepper>
+    <!-- Subscription Parameters -->
+    <mat-step [stepControl]="subscriptionParameters">
+      <app-subscription-params [subscriptionParameters]="subscriptionParameters" [amounts]="amounts"
+                               [durations]="durations"
+                               [configuration]="{
+                               findOptionTextBy: findOptionTextBy.bind(this),
+                               orderForm: orderForm,
+                               total: total
+                               }"
+      ></app-subscription-params>
+    </mat-step>
+    <!-- .Subscription Parameters -->
+
+    <!-- Payment Data -->
+    <mat-step [stepControl]="paymentData">
+      <app-payment-data [paymentData]="paymentData" [configuration]="{
+                               findOptionTextBy: findOptionTextBy.bind(this),
+                               orderForm: orderForm,
+                               total: total
+                               }"></app-payment-data>
+    </mat-step>
+    <!-- .Payment Data -->
+
+    <!-- Finalization -->
+    <mat-step>
+      <app-finalization (onFinishPayement)="finishPayement()" [findOptionTextBy]="findOptionTextBy.bind(this)"
+                        [orderForm]="orderForm" [total]="total"></app-finalization>
+    </mat-step>
+    <!-- .Finalization -->
+  </mat-stepper>
+</div>
+<ngx-spinner></ngx-spinner>

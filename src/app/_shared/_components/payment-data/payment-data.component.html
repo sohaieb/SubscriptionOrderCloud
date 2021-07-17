@@ -1,0 +1,40 @@
+<form [formGroup]="paymentData">
+  <ng-template matStepLabel>Payement Data:</ng-template>
+  <mat-grid-list cols="2" rowHeight="100px">
+    <mat-grid-tile colspan="2" rowspan="1">
+      <mat-form-field appearance="fill" class="width-100">
+        <mat-label>Card number</mat-label>
+        <input formControlName="cardNumber" type="text" matInput placeholder="xxxx xxxx xxxx xxxx"
+               mask="0000 0000 0000 0000"/>
+        <mat-error *ngIf="paymentData.get('cardNumber')?.errors">
+          Please enter a valid card number
+        </mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile class="left">
+      <mat-form-field appearance="fill">
+        <mat-label>Card Expiration Date</mat-label>
+        <input formControlName="cardExpiration" type="text" matInput placeholder="MM / YY" mask="00 / 00"/>
+        <mat-error *ngIf="paymentData.get('cardExpiration')?.errors">
+          Please enter a valid expiration date
+        </mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile class="right">
+      <mat-form-field appearance="fill">
+        <mat-label>Card Security Code</mat-label>
+        <input formControlName="cardSecurityCode" type="password" matInput mask="0009"/>
+        <mat-error *ngIf="paymentData.get('cardSecurityCode')?.errors">
+          Card security code is required
+        </mat-error>
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <app-calculation [total]="configuration.total" [orderForm]="configuration.orderForm" [findOptionTextBy]="configuration.findOptionTextBy"></app-calculation>
+  <div class="next-previous-group">
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext [disabled]="paymentData.invalid">Next</button>
+    </div>
+  </div>
+</form>
