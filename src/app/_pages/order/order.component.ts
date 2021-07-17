@@ -2,6 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AMOUNT_GB, DURATIONS} from "../../_constants/GLOBALS";
 import {email, expirationDate} from "../../_custom_validators/CustomValidators";
+import {OrderService} from "../../_services/order.service";
+import Swal from 'sweetalert2'
+import {NgxSpinnerService} from "ngx-spinner";
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-order',
@@ -26,7 +30,11 @@ export class OrderComponent implements OnInit, OnDestroy {
     return this.orderForm.get('paymentData') as FormGroup;
   }
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private orderService: OrderService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.initFormStepper();
@@ -128,8 +136,31 @@ export class OrderComponent implements OnInit, OnDestroy {
   /**
    * Payement finalization process & Send data to server side
    */
-  finishPayement() {
-    // send data to Server side
+  async finishPayement() {
+    await this.spinner.show();
+    let body = this.orderForm.value;
+    body.total = this.total;
+    this.orderService
+      .finalizeSubscriptionOrder(body)
+      .pipe(finalize(()=> this.spinner.hide()))
+      .subscribe(
+        response => {
+          Swal.fire({
+            title: 'Congratulation!',
+            text: 'Your subscription order was successfully finished!',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          });
+        },
+        error => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'There is an error when trying to connect to server!',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
+      );
   }
 
   ngOnDestroy() {

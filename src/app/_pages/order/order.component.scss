@@ -3,6 +3,10 @@
   max-width: 1024px;
   margin: 0 auto;
   ::ng-deep {
+    .next-previous-group {
+      display: grid;
+      justify-items: end;
+    }
     .font-size-2 {
       font-size: 1.2rem;
     }

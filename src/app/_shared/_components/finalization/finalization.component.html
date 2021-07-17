@@ -5,13 +5,13 @@
       <mat-label class="font-size-2"><b>Payement Summary:</b></mat-label>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1" class="left">
-      <b>Selected Subscription:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.text}}
+      <b>Selected Subscription:</b> {{findOptionTextBy('duration', orderForm.get('subParams.duration')?.value)?.text}}
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1" class="left">
-      <b>Selected Amount:</b> {{findOptionTextBy('amount',orderForm.get('subParams.amount')?.value)?.text}}
+      <b>Selected Amount:</b> {{findOptionTextBy('amount', orderForm.get('subParams.amount')?.value)?.text}}
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1" class="left">
-      <b>Price per GB:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.price_per_gb}} $
+      <b>Price per GB:</b> {{findOptionTextBy('duration', orderForm.get('subParams.duration')?.value)?.price_per_gb}} $
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1" class="left">
       <b>Upfront payement:</b> {{findOptionTextBy('upfront')}}
@@ -30,12 +30,17 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1" class="left">
       <section class="example-section">
-        <mat-checkbox formControlName="termsCondition" class="example-margin">I accepte Terms and conditions.</mat-checkbox>
+        <mat-checkbox formControlName="termsCondition" class="example-margin">I accepte Terms and conditions.
+        </mat-checkbox>
       </section>
     </mat-grid-tile>
   </mat-grid-list>
-  <div>
-    <button mat-button matStepperPrevious>Back</button>
-    <button mat-button [disabled]="orderForm.invalid || !orderForm.get('finalization.termsCondition')?.value" (click)="finishPayement()">Finish</button>
+  <div class="next-previous-group">
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button [disabled]="orderForm.invalid || !orderForm.get('finalization.termsCondition')?.value"
+              (click)="finishPayement()">Finish
+      </button>
+    </div>
   </div>
 </form>

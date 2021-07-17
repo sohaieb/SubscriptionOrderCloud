@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PaymentDataComponent implements OnInit {
   @Input() paymentData: any;
-
+  @Input() configuration: any;
   constructor() { }
 
   ngOnInit(): void {
