@@ -1,0 +1,23 @@
+.container {
+  min-width: 550px;
+  max-width: 1024px;
+  margin: 0 auto;
+  ::ng-deep {
+    .font-size-2 {
+      font-size: 1.2rem;
+    }
+    .mat-checkbox-checked .mat-checkbox-background {
+      background: #3f51b5;
+    }
+    .width-100 {
+      width: 100%;
+    }
+
+    .left .mat-grid-tile-content {
+      justify-content: flex-start;
+    }
+    .right .mat-grid-tile-content {
+      justify-content: flex-end;
+    }
+  }
+}

@@ -10,18 +10,26 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatModules} from "./_shared/_modules/shared-material-design.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgxMaskModule} from "ngx-mask";
+import { SubscriptionParamsComponent } from './_shared/_components/subscription-params/subscription-params.component';
+import { PaymentDataComponent } from './_shared/_components/payment-data/payment-data.component';
+import { FinalizationComponent } from './_shared/_components/finalization/finalization.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrderComponent
+    OrderComponent,
+    SubscriptionParamsComponent,
+    PaymentDataComponent,
+    FinalizationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatModules,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
