@@ -10,6 +10,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatModules} from "./_shared/_modules/shared-material-design.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgxMaskModule} from "ngx-mask";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatModules,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

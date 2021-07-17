@@ -46,19 +46,19 @@
           <mat-grid-tile colspan="2" rowspan="1">
             <mat-form-field appearance="fill" class="width-100">
               <mat-label>Card number</mat-label>
-              <input formControlName="cardNumber" type="text" matInput placeholder="xxxx xxxx xxxx xxx" />
+              <input formControlName="cardNumber" type="text" matInput placeholder="xxxx xxxx xxxx xxxx" mask="0000 0000 0000 0000" />
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile class="left">
             <mat-form-field appearance="fill">
               <mat-label>Card Expiration Date</mat-label>
-              <input formControlName="cardExpiration" type="text" matInput placeholder="xx / xx" />
+              <input formControlName="cardExpiration" type="text" matInput placeholder="xx / xx" mask="00 / 00"  />
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile class="right">
             <mat-form-field appearance="fill">
               <mat-label>Card Security Code</mat-label>
-              <input formControlName="cardSecurityCode" type="password" matInput />
+              <input formControlName="cardSecurityCode" type="password" matInput mask="0009" />
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
