@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AMOUNT_GB, DURATIONS} from "../../_constants/GLOBALS";
+import {expirationDate} from "../../_custom_validators/CustomValidators";
 
 @Component({
   selector: 'app-order',
@@ -46,7 +47,7 @@ export class OrderComponent implements OnInit {
   private getPayementDataFormGroup() {
     return this._formBuilder.group({
       cardNumber: ['',[Validators.required]],
-      cardExpiration: ['',[Validators.required]],
+      cardExpiration: ['',[Validators.required, expirationDate()]],
       cardSecurityCode: ['',[Validators.required]]
     });
   }
