@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AMOUNT_GB, DURATIONS} from "../../_constants/GLOBALS";
-import {expirationDate} from "../../_custom_validators/CustomValidators";
+import {email, expirationDate} from "../../_custom_validators/CustomValidators";
 
 @Component({
   selector: 'app-order',
@@ -14,6 +14,7 @@ export class OrderComponent implements OnInit {
   amounts = AMOUNT_GB;
   // @ts-ignore
   orderForm: FormGroup;
+
   get subscriptionParameters(): FormGroup {
     return this.orderForm.get('subParams') as FormGroup;
   }
@@ -22,6 +23,9 @@ export class OrderComponent implements OnInit {
     return this.orderForm.get('paymentData') as FormGroup;
   }
 
+  get finalizationGroup() : FormGroup {
+    return this.orderForm.get('finalization') as FormGroup;
+  }
 
   constructor(private _formBuilder: FormBuilder) {}
 
@@ -29,6 +33,11 @@ export class OrderComponent implements OnInit {
     this.initFormStepper();
   }
 
+  /**
+   * Initialize form group for stepper
+   *
+   * @private
+   */
   private initFormStepper() {
     this.orderForm = this._formBuilder.group({
       subParams: this.getSubscriptionParametersFormGroup(),
@@ -37,13 +46,24 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  /**
+   * Get Subscription final form group.
+   *
+   * @private
+   */
   private getFinalizationFormGroup() {
     return this._formBuilder.group({
-      userEmail: [],
-      termsCondition: []
+      userEmail: [null, [Validators.required, email()]],
+      termsCondition: [false]
     });
   }
 
+  /**
+   * Get Subscription payement card number, card expiration date and
+   * card security code form group.
+   *
+   * @private
+   */
   private getPayementDataFormGroup() {
     return this._formBuilder.group({
       cardNumber: ['',[Validators.required]],
@@ -52,11 +72,39 @@ export class OrderComponent implements OnInit {
     });
   }
 
+  /**
+   * Get Subscription duration,amount and upfront status
+   * parameters form group.
+   *
+   * @private
+   */
   private getSubscriptionParametersFormGroup() {
     return this._formBuilder.group({
       duration: [this.durations[2].value],
       amount: [this.amounts[0].value],
       upfront: [false]
     });
+  }
+
+  /**
+   * Find option by entered key
+   */
+  findOptionTextBy(option: 'duration' | 'amount', value: any) : any{
+    switch (option){
+      case 'duration': {
+        // @ts-ignore
+        return this.durations.find(duration => duration.value == value);
+      }
+      case 'amount' : {
+        return this.amounts.find(amount => amount.value == value);
+      }
+    }
+  }
+
+  /**
+   * Payement finalization process
+   */
+  finishPayement() {
+
   }
 }

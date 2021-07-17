@@ -46,35 +46,63 @@
           <mat-grid-tile colspan="2" rowspan="1">
             <mat-form-field appearance="fill" class="width-100">
               <mat-label>Card number</mat-label>
-              <input formControlName="cardNumber" type="text" matInput placeholder="xxxx xxxx xxxx xxxx" mask="0000 0000 0000 0000" />
+              <input formControlName="cardNumber" type="text" matInput placeholder="xxxx xxxx xxxx xxxx"
+                     mask="0000 0000 0000 0000"/>
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile class="left">
             <mat-form-field appearance="fill">
               <mat-label>Card Expiration Date</mat-label>
-              <input formControlName="cardExpiration" type="text" matInput placeholder="MM / YY" mask="00 / 00"  />
+              <input formControlName="cardExpiration" type="text" matInput placeholder="MM / YY" mask="00 / 00"/>
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile class="right">
             <mat-form-field appearance="fill">
               <mat-label>Card Security Code</mat-label>
-              <input formControlName="cardSecurityCode" type="password" matInput mask="0009" />
+              <input formControlName="cardSecurityCode" type="password" matInput mask="0009"/>
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext [disabled]="paymentData.invalid">Next</button>
         </div>
       </form>
     </mat-step>
 
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
+      <form [formGroup]="finalizationGroup">
+        <ng-template matStepLabel>You are almost done!</ng-template>
+        <mat-grid-list cols="1" rowHeight="80px">
+          <mat-grid-tile colspan="1" rowspan="1" class="left">
+            <mat-label class="font-size-2">Payement Summary:</mat-label>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1" class="left">
+              <b>Selected Subscription:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.text}}
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1" class="left">
+              <b>Price per GB:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.price_per_gb}}
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1" class="left">
+              <b>Total price:</b> {{findOptionTextBy('duration',orderForm.get('subParams.duration')?.value)?.price_per_gb}}
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1" class="left">
+            <mat-form-field appearance="fill" class="width-100">
+              <mat-label>Your Email</mat-label>
+              <input formControlName="userEmail" type="text" matInput placeholder="example@example.com"/>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1" class="left">
+            <section class="example-section">
+              <mat-checkbox formControlName="termsCondition" class="example-margin">I accepte Terms and conditions.</mat-checkbox>
+            </section>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button [disabled]="orderForm.invalid || !orderForm.get('finalization.termsCondition')?.value" (click)="finishPayement()">Finish</button>
+        </div>
+      </form>
     </mat-step>
   </mat-stepper>
 </div>

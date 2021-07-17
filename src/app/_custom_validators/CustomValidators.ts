@@ -15,7 +15,22 @@ export function expirationDate(): ValidatorFn {
         return {expirationDate: true};
       }
     }
-    console.log('null block');
+    return null;
+  };
+}
+
+
+export function email(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    let emailRegExp = /^[a-zA-Z][a-zA-Z0-9.]+[a-zA-Z0-9]@[a-zA-Z]([a-zA-Z0-9.\-]+)?[a-zA-Z0-9]\.[a-zA-Z]{2,3}$/
+    let controlValue = control.value;
+    if(controlValue) {
+      try {
+        return emailRegExp.test(controlValue)? null : {email: true};
+      }catch (e) {
+        return {email: true};
+      }
+    }
     return null;
   };
 }

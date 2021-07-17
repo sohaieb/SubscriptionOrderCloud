@@ -1,15 +1,18 @@
 export const DURATIONS = [
   {
     text: 'Three Months',
-    value: 3
+    value: 3,
+    price_per_gb: 3
   },
   {
     text: 'Six Months',
-    value: 6
+    value: 6,
+    price_per_gb: 2.5
   },
   {
     text: 'One year',
-    value: 12
+    value: 12,
+    price_per_gb: 2
   },
 ];
 
